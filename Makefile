@@ -4,21 +4,22 @@
 
 include config.mk
 
-SRC = st.c x.c
-OBJ = $(SRC:.c=.o)
+SRC = src/st.c src/x.c
+OBJ = obj/st.o obj/x.o
+HEADERS = src/config.h src/st.h src/win.h
 
 all: st
 
 config.h:
-	cp config.def.h config.h
+	cp src/config.def.h src/config.h
 
-.c.o:
-	$(CC) $(STCFLAGS) -c $<
+obj/%.o: src/%.c
+	$(CC) $(STCFLAGS) -o $@ -c $<
 
-st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h
+obj/st.o: $(HEADERS)
+obj/x.o: src/arg.h $(HEADERS)
 
-$(OBJ): config.h config.mk
+$(OBJ): src/config.h config.mk
 
 st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
