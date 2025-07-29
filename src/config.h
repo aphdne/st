@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 2;
+static int borderpx = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -169,6 +169,42 @@ static unsigned int defaultattr = 11;
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = ShiftMask;
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",         STRING,  &font },
+		{ "norm1",        STRING,  &colorname[0] },
+		{ "norm2",        STRING,  &colorname[1] },
+		{ "norm3",        STRING,  &colorname[2] },
+		{ "norm4",        STRING,  &colorname[3] },
+		{ "norm5",        STRING,  &colorname[4] },
+		{ "norm6",        STRING,  &colorname[5] },
+		{ "norm7",        STRING,  &colorname[6] },
+		{ "norm8",        STRING,  &colorname[7] },
+		{ "bright1",      STRING,  &colorname[8] },
+		{ "bright2",      STRING,  &colorname[9] },
+		{ "bright3",      STRING,  &colorname[10] },
+		{ "bright4",      STRING,  &colorname[11] },
+		{ "bright5",      STRING,  &colorname[12] },
+		{ "bright6",      STRING,  &colorname[13] },
+		{ "bright7",      STRING,  &colorname[14] },
+		{ "bright8",      STRING,  &colorname[15] },
+		{ "cursorcolor",  STRING,  &colorname[256] },
+		{ "foreground",   STRING,  &colorname[258] },
+		{ "background",   STRING,  &colorname[259] },
+		{ "termname",     STRING,  &termname },
+		{ "shell",        STRING,  &shell },
+		{ "minlatency",   INTEGER, &minlatency },
+		{ "maxlatency",   INTEGER, &maxlatency },
+		{ "blinktimeout", INTEGER, &blinktimeout },
+		{ "bellvolume",   INTEGER, &bellvolume },
+		{ "tabspaces",    INTEGER, &tabspaces },
+		{ "borderpx",     INTEGER, &borderpx },
+		{ "cwscale",      FLOAT,   &cwscale },
+		{ "chscale",      FLOAT,   &chscale },
+};
 
 /*
  * Internal mouse shortcuts.
