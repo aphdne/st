@@ -8,6 +8,13 @@
 static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 0;
 
+/* How to align the content in the window when the size of the terminal
+ * doesn't perfectly match the size of the window. The values are percentages.
+ * 50 means center, 0 means flush left/top, 100 means flush right/bottom.
+ */
+static int anysize_halign = 50;
+static int anysize_valign = 50;
+
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
@@ -23,7 +30,8 @@ char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
-char *vtiden = "\033[?6c";
+/* By default, use the same one as kitty. */
+char *vtiden = "\033[?62c";
 
 /* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
@@ -165,6 +173,28 @@ static unsigned int mousebg = 0;
  * doesn't match the ones requested.
  */
 static unsigned int defaultattr = 11;
+
+/*
+ * Graphics configuration
+ */
+
+/// The template for the cache directory.
+const char graphics_cache_dir_template[] = "/tmp/st-images-XXXXXX";
+/// The max size of a single image file, in bytes.
+unsigned graphics_max_single_image_file_size = 20 * 1024 * 1024;
+/// The max size of the cache, in bytes.
+unsigned graphics_total_file_cache_size = 300 * 1024 * 1024;
+/// The max ram size of an image or placement, in bytes.
+unsigned graphics_max_single_image_ram_size = 100 * 1024 * 1024;
+/// The max total size of all images loaded into RAM.
+unsigned graphics_max_total_ram_size = 300 * 1024 * 1024;
+/// The max total number of image placements and images.
+unsigned graphics_max_total_placements = 4096;
+/// The ratio by which limits can be exceeded. This is to reduce the frequency
+/// of image removal.
+double graphics_excess_tolerance_ratio = 0.05;
+/// The minimum delay between redraws caused by animations, in milliseconds.
+unsigned graphics_animation_min_delay = 20;
 
 /*
  * Force mouse select/shortcuts while mask is active (when MODE_MOUSE is set).

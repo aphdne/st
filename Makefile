@@ -4,9 +4,9 @@
 
 include config.mk
 
-SRC = src/st.c src/x.c
-OBJ = obj/st.o obj/x.o
-HEADERS = src/config.h src/st.h src/win.h
+SRC = src/st.c src/x.c src/rowcolumn_diacritics_helpers.c src/graphics.c
+OBJ = obj/st.o obj/x.o obj/rowcolumn_diacritics_helpers.o obj/graphics.o
+HEADERS = src/config.h src/st.h src/win.h src/khash.h src/kvec.h src/graphics.h
 
 all: st
 
