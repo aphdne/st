@@ -93,6 +93,9 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
+/* bg opacity */
+float alpha = 0.8;
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
@@ -175,6 +178,7 @@ static uint forcemousemod = ShiftMask;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
+		{ "alpha",        FLOAT,   &alpha },
 		{ "norm1",        STRING,  &colorname[0] },
 		{ "norm2",        STRING,  &colorname[1] },
 		{ "norm3",        STRING,  &colorname[2] },
